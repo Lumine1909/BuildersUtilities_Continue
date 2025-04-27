@@ -1,14 +1,14 @@
 plugins {
 	id("java")
 	id("com.github.johnrengelman.shadow") version "8.1.1"
-	id("io.papermc.paperweight.userdev") version "1.7.1"
+	id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
 	id("net.kyori.indra.checkstyle") version "3.1.3"
-	id("xyz.jpenilla.run-paper") version "2.3.0"
+	id("xyz.jpenilla.run-paper") version "2.3.1"
 	id("com.github.ben-manes.versions") version "0.51.0"
 }
 
 group = "dev.tehbrian"
-version = "1.8.3"
+version = "1.8.4"
 description = "A curated bundle of tiny features that help builders do their thing."
 
 java {
@@ -19,11 +19,12 @@ repositories {
 	mavenCentral()
 	maven("https://papermc.io/repo/repository/maven-public/")
 	maven("https://repo.thbn.me/releases/")
+	maven("https://repo.broccol.ai/snapshots/")
 	maven("https://repo.thbn.me/snapshots/")
 }
 
 dependencies {
-	paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
+	paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
 
 	implementation("org.jspecify:jspecify:1.0.0")
 	implementation("love.broccolai.corn:corn-minecraft:4.0.0-SNAPSHOT")
@@ -34,12 +35,12 @@ dependencies {
 	implementation("com.google.inject:guice:7.0.0")
 	implementation("org.spongepowered:configurate-yaml:4.1.2")
 	implementation("dev.tehbrian:tehlib-paper:0.6.0")
-	implementation("dev.tehbrian.restrictionhelper:restrictionhelper-spigot:0.4.1")
+	implementation("dev.tehbrian:restrictionhelper-spigot:0.5.0")
 }
 
 tasks {
 	assemble {
-		dependsOn(reobfJar)
+		dependsOn(shadowJar)
 	}
 
 	processResources {
@@ -81,6 +82,6 @@ tasks {
 	}
 
 	runServer {
-		minecraftVersion("1.21.1")
+		minecraftVersion("1.21.4")
 	}
 }
